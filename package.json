@@ -1,0 +1,30 @@
+{
+  "name": "blog-news-crawler",
+  "version": "1.0.0",
+  "description": "네이버 뉴스 자동 크롤링 시스템",
+  "main": "news-scheduler.js",
+  "scripts": {
+    "dev": "npx http-server -p 8080 -c-1",
+    "start": "node news-scheduler.js",
+    "crawl": "node crawl-news.js",
+    "test": "node crawl-news.js",
+    "build:css": "tailwindcss -i ./input.css -o ./output.css --minify",
+    "watch:css": "tailwindcss -i ./input.css -o ./output.css --watch"
+  },
+  "keywords": [
+    "crawler",
+    "news",
+    "naver",
+    "playwright"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.40.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17"
+  }
+}

@@ -5,20 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>네이버 블로그 수익화 실전 강의 - 글이 매출이 되도록</title>
     <meta name="description" content="검색 상위노출과 전환형 글쓰기, AI 자동화까지 한 번에. N잡러·사업자 1,000+명 실전 적용 템플릿 제공">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#FF6B6B',
-                        accent: '#4ECDC4'
-                    }
-                }
-            },
-            darkMode: 'class'
-        }
-    </script>
+    <link rel="stylesheet" href="output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="bg-white dark:bg-gray-900 transition-colors duration-300">
@@ -254,6 +241,31 @@
         </div>
     </section>
 
+    <!-- News Section -->
+    <section id="news" class="py-20 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+                    최신 블로그 마케팅 뉴스
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300">
+                    매시간 업데이트되는 최신 마케팅 트렌드를 확인하세요
+                </p>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                    마지막 업데이트: <span id="newsLastUpdate">로딩 중...</span>
+                </p>
+            </div>
+
+            <div id="newsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 뉴스 카드가 여기에 동적으로 추가됩니다 -->
+                <div class="text-center col-span-full py-12">
+                    <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                    <p class="mt-4 text-gray-600 dark:text-gray-300">뉴스를 불러오는 중...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Pricing Section -->
     <section id="pricing" class="py-20 bg-gray-50 dark:bg-gray-800">
         <div class="container mx-auto px-4">
@@ -463,6 +475,63 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
+    <!-- AI Chatbot - TreeBot -->
+    <div id="treeBot" class="fixed bottom-24 right-6 z-50">
+        <!-- Chat Toggle Button -->
+        <button id="treeBotToggle" class="bg-accent text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 mb-4">
+            <i class="fas fa-robot text-xl" id="treeBotIcon"></i>
+        </button>
+
+        <!-- Chat Window -->
+        <div id="treeBotChat" class="hidden bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-80 h-96 border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <!-- Chat Header -->
+            <div class="bg-accent text-white p-4 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-robot text-accent text-lg"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold">트리봇</h3>
+                        <p class="text-xs opacity-90">AI 상담 도우미</p>
+                    </div>
+                </div>
+                <button id="treeBotClose" class="hover:bg-white/20 rounded-full p-2 transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Chat Messages -->
+            <div id="treeBotMessages" class="h-64 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-gray-900">
+                <!-- 메시지가 여기에 동적으로 추가됩니다 -->
+            </div>
+
+            <!-- Chat Input -->
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex space-x-2">
+                    <input type="text" id="treeBotInput" placeholder="궁금한 점을 물어보세요..."
+                           class="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+                    <button id="treeBotSend" class="bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        <i class="fas fa-paper-plane text-sm"></i>
+                    </button>
+                </div>
+                <p class="text-xs text-gray-500 mt-2 text-center">
+                    Powered by Gemini 2.0 Flash
+                </p>
+            </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="treeBotLoading" class="hidden absolute bottom-16 right-2 bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg">
+            <div class="flex space-x-1">
+                <div class="w-2 h-2 bg-accent rounded-full animate-bounce"></div>
+                <div class="w-2 h-2 bg-accent rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
+                <div class="w-2 h-2 bg-accent rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
+    <script src="treebot.js"></script>
+    <script src="news-loader.js"></script>
 </body>
 </html>
