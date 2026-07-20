@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI 1인 비즈니스 자동화 6회 완성반 - 수익화 방향 설정부터 SNS 자동화, 개인 업무 자동화, AI 에이전트, Claude Code까지" />
+  <title>AI 1인 비즈니스 자동화 6회 완성반</title>
+  <style>
+    :root{
+      --bg:#f5f8ff;
+      --surface:#ffffff;
+      --text:#111827;
+      --muted:#667085;
+      --line:#dbe4f3;
+      --primary:#1f5eff;
+      --primary-dark:#123ec8;
+      --accent:#0f172a;
+      --soft:#eaf0ff;
+      --success:#0f9f6e;
+      --warning:#fff5d9;
+      --shadow:0 18px 50px rgba(31,94,255,.12);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+    a{text-decoration:none;color:inherit}
+    .wrap{width:min(1120px, calc(100% - 36px)); margin:0 auto}
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:92px 0 72px;
+      background:
+        radial-gradient(circle at 85% 18%, rgba(65,105,255,.22), transparent 34%),
+        radial-gradient(circle at 10% 15%, rgba(123,172,255,.22), transparent 32%),
+        linear-gradient(135deg,#0f172a 0%,#102a67 54%,#1649bd 100%);
+      color:#fff;
+    }
+    .hero:after{
+      content:"";
+      position:absolute;
+      width:480px;height:480px;
+      border:1px solid rgba(255,255,255,.13);
+      border-radius:50%;
+      right:-150px;bottom:-260px;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:-.02em;
+    }
+    h1{
+      margin:24px 0 18px;
+      font-size:clamp(38px,6vw,68px);
+      line-height:1.12;
+      letter-spacing:-.055em;
+      max-width:840px;
+    }
+    .hero-sub{
+      font-size:clamp(18px,2.4vw,24px);
+      color:rgba(255,255,255,.84);
+      max-width:760px;
+      margin:0 0 30px;
+      letter-spacing:-.025em;
+    }
+    .hero-points{
+      display:flex;flex-wrap:wrap;gap:10px;
+      margin:0 0 34px;
+    }
+    .hero-points span{
+      padding:9px 13px;
+      border-radius:12px;
+      background:rgba(255,255,255,.1);
+      font-size:14px;
+      font-weight:700;
+    }
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px}
+    .btn{
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      min-height:54px;
+      padding:0 22px;
+      border-radius:14px;
+      font-weight:800;
+      transition:.2s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:#fff;color:var(--primary-dark);box-shadow:0 12px 32px rgba(0,0,0,.16)}
+    .btn-outline{border-color:rgba(255,255,255,.35);color:#fff;background:rgba(255,255,255,.06)}
+    section{padding:78px 0}
+    .section-title{
+      margin:0 0 14px;
+      font-size:clamp(30px,4vw,46px);
+      letter-spacing:-.05em;
+      line-height:1.22;
+    }
+    .section-desc{
+      margin:0 0 34px;
+      color:var(--muted);
+      font-size:18px;
+      max-width:760px;
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .card{
+      background:var(--surface);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:0 8px 22px rgba(17,24,39,.04);
+    }
+    .card h3{margin:0 0 10px;font-size:21px;letter-spacing:-.035em}
+    .card p{margin:0;color:var(--muted)}
+    .icon{
+      width:44px;height:44px;border-radius:13px;
+      background:var(--soft);
+      display:grid;place-items:center;
+      color:var(--primary);
+      font-weight:900;
+      margin-bottom:18px;
+    }
+    .timeline{
+      display:grid;
+      gap:16px;
+    }
+    .session{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:26px;
+      display:grid;
+      grid-template-columns:120px 1fr;
+      gap:24px;
+      align-items:start;
+    }
+    .session-no{
+      background:var(--accent);
+      color:#fff;
+      padding:13px 14px;
+      border-radius:15px;
+      text-align:center;
+      font-weight:900;
+      letter-spacing:-.02em;
+    }
+    .session-date{
+      margin-top:10px;
+      font-size:13px;
+      color:#dbeafe;
+      font-weight:700;
+      line-height:1.45;
+    }
+    .session h3{margin:0 0 12px;font-size:23px;letter-spacing:-.04em}
+    .session ul{margin:0;padding-left:20px;color:#475467}
+    .session li+li{margin-top:5px}
+    .highlight{
+      background:linear-gradient(135deg,#edf3ff,#fff);
+      border:1px solid #cfdcff;
+      box-shadow:var(--shadow);
+    }
+    .for-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+    .checklist{list-style:none;padding:0;margin:0}
+    .checklist li{
+      position:relative;
+      padding-left:32px;
+      margin:13px 0;
+      color:#344054;
+      font-size:17px;
+    }
+    .checklist li:before{
+      content:"✓";
+      position:absolute;
+      left:0;top:1px;
+      width:22px;height:22px;
+      border-radius:50%;
+      display:grid;place-items:center;
+      background:#e7f8f2;
+      color:var(--success);
+      font-size:13px;
+      font-weight:900;
+    }
+    .price-box{
+      background:#0f172a;
+      color:#fff;
+      border-radius:28px;
+      padding:34px;
+      box-shadow:0 18px 45px rgba(15,23,42,.22);
+    }
+    .price-label{color:#bfd0ff;font-weight:800}
+    .price{
+      margin:8px 0 18px;
+      font-size:52px;
+      line-height:1;
+      letter-spacing:-.05em;
+      font-weight:900;
+    }
+    .price small{font-size:20px;font-weight:700}
+    .info-list{
+      list-style:none;
+      padding:0;margin:20px 0 0;
+      border-top:1px solid rgba(255,255,255,.14);
+    }
+    .info-list li{
+      padding:14px 0;
+      border-bottom:1px solid rgba(255,255,255,.12);
+      color:#e5e7eb;
+    }
+    .payment-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .bank{
+      background:var(--warning);
+      border:1px solid #f3df9f;
+      border-radius:20px;
+      padding:24px;
+      color:#3f3517;
+    }
+    .bank strong{display:block;font-size:21px;margin-bottom:7px}
+    .notice{
+      font-size:14px;
+      color:var(--muted);
+      margin-top:12px;
+    }
+    .sticky{
+      position:sticky;
+      bottom:0;
+      z-index:20;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(14px);
+      border-top:1px solid var(--line);
+      padding:12px 0;
+    }
+    .sticky-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+    .sticky-copy strong{display:block}
+    .sticky-copy span{font-size:14px;color:var(--muted)}
+    .sticky-actions{display:flex;gap:10px}
+    .sticky .btn-primary{background:var(--primary);color:#fff;box-shadow:none}
+    .sticky .btn-outline{border-color:var(--line);color:var(--text);background:#fff}
+    footer{
+      padding:34px 0 88px;
+      color:#7a8699;
+      font-size:14px;
+      text-align:center;
+    }
+    @media (max-width:820px){
+      .grid-3,.for-grid,.payment-grid{grid-template-columns:1fr}
+      .session{grid-template-columns:1fr}
+      .session-no{text-align:left}
+      .sticky-copy{display:none}
+      .sticky-actions{width:100%}
+      .sticky .btn{flex:1;padding:0 12px}
+    }
+    @media (max-width:560px){
+      .hero{padding:68px 0 54px}
+      section{padding:58px 0}
+      .wrap{width:min(100% - 24px,1120px)}
+      .card,.session,.price-box{padding:22px}
+      .price{font-size:44px}
+      .hero .btn{width:100%}
+      .cta-row{display:grid}
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">격주 월요일 · 총 6회 · 회차당 2시간</span>
+    <h1>AI 1인 비즈니스<br>자동화 6회 완성반</h1>
+    <p class="hero-sub">
+      아이템이 없어도 괜찮습니다. 내 경험에서 수익화 방향을 찾고,
+      SNS 콘텐츠부터 개인 업무와 반복 작업까지 AI가 대신 처리하는 구조를 만듭니다.
+    </p>
+    <div class="hero-points">
+      <span>수익화 방향 설정</span>
+      <span>Claude Skill</span>
+      <span>SNS 자동화</span>
+      <span>개인 업무 자동화</span>
+      <span>AI 에이전트</span>
+      <span>Claude Code</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://forms.gle/hGv6V1eZfeUU8DCb9" target="_blank" rel="noopener">신청폼 작성하기</a>
+      <a class="btn btn-outline" href="https://www.payapp.kr/L/z4hvp1" target="_blank" rel="noopener">카드로 결제하기</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">이 과정은 AI 기능 설명에서 끝나지 않습니다</h2>
+    <p class="section-desc">
+      혼자 일하면서 반복되는 콘텐츠, 자료 조사, 문서 작성, 고객관리 업무를
+      실제로 줄이는 데 초점을 맞춥니다.
+    </p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">01</div>
+        <h3>아이템이 없는 사람</h3>
+        <p>내 경험과 강점에서 SNS 주제와 수익화 방향을 찾고, AI를 활용해 검증합니다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">02</div>
+        <h3>사업이 있는 사람</h3>
+        <p>시장조사, 콘텐츠 제작, 문서, 고객관리 등 기존 업무를 AI로 자동화합니다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">03</div>
+        <h3>AI 초보자</h3>
+        <p>복잡한 코딩보다 내 업무를 AI에게 정확하게 맡기고 반복 실행하는 방법부터 익힙니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title">6회차 커리큘럼</h2>
+    <p class="section-desc">
+      수익화 방향 설정부터 SNS 자동화, 개인 업무팀과 자동화 도구 구축까지 순서대로 진행합니다.
+    </p>
+
+    <div class="timeline">
+      <article class="session">
+        <div class="session-no">1회차<div class="session-date">8월 3일(월)<br>저녁 10시~12시</div></div>
+        <div>
+          <h3>내 경험에서 수익화 방향 찾기</h3>
+          <ul>
+            <li>내 경험·강점·관심사에서 수익화 가능성 찾기</li>
+            <li>사람들이 필요로 하는 문제와 내 경험 연결하기</li>
+            <li>SNS에서 지속적으로 다룰 핵심 주제 선정</li>
+            <li>무료 콘텐츠와 향후 상품화 방향 설정</li>
+            <li>아이템이 있는 사람과 없는 사람의 출발점 구분</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="session">
+        <div class="session-no">2회차<div class="session-date">8월 17일(월)<br>저녁 10시~12시</div></div>
+        <div>
+          <h3>Claude Skill로 내 업무 방식 만들기</h3>
+          <ul>
+            <li>일반 프롬프트와 Claude Skill의 차이</li>
+            <li>내 말투·기준·업무 방식을 AI에 적용하는 방법</li>
+            <li>시장조사·콘텐츠·상품 기획 Skill 구성</li>
+            <li>반복해서 사용하는 업무 지침 만들기</li>
+            <li>AI 결과물의 품질을 높이는 검수 기준 설정</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="session">
+        <div class="session-no">3회차<div class="session-date">8월 31일(월)<br>저녁 10시~12시</div></div>
+        <div>
+          <h3>Claude Cowork로 SNS 콘텐츠 자동화</h3>
+          <ul>
+            <li>시장 트렌드와 경쟁 콘텐츠 자동 조사</li>
+            <li>고객 고민을 기반으로 SNS 주제 선정</li>
+            <li>릴스·카드뉴스·블로그 콘텐츠 제작</li>
+            <li>하나의 아이디어를 여러 콘텐츠로 재활용</li>
+            <li>후킹 문구·CTA·자동 DM까지 연결하기</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="session">
+        <div class="session-no">4회차<div class="session-date">9월 14일(월)<br>저녁 10시~12시</div></div>
+        <div>
+          <h3>Claude Cowork로 개인 업무 자동화</h3>
+          <ul>
+            <li>자료 조사·문서 정리·보고서 작성 자동화</li>
+            <li>회의록·제안서·강의자료 제작 흐름</li>
+            <li>여러 파일과 문서를 한 번에 분석하는 방법</li>
+            <li>일정·할 일·고객 문의 정리 자동화</li>
+            <li>반복 업무를 줄이는 개인 AI 업무 루틴 만들기</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="session">
+        <div class="session-no">5회차<div class="session-date">9월 28일(월)<br>저녁 10시~12시</div></div>
+        <div>
+          <h3>AI 에이전트로 개인 업무팀 만들기</h3>
+          <ul>
+            <li>일반 AI 활용과 AI 에이전트의 차이</li>
+            <li>조사·기획·콘텐츠·검수 역할 나누기</li>
+            <li>Claude Cowork로 역할별 AI 업무팀 구성</li>
+            <li>시장조사부터 콘텐츠 검수까지 연결하기</li>
+            <li>수익화 아이템을 찾고 발전시키는 에이전트 설계</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="session">
+        <div class="session-no">6회차<div class="session-date">10월 12일(월)<br>저녁 10시~12시</div></div>
+        <div>
+          <h3>Claude Code로 개인 자동화 도구 만들기</h3>
+          <ul>
+            <li>비개발자를 위한 Claude Code 활용법</li>
+            <li>반복 업무를 자동화 도구로 바꾸는 방법</li>
+            <li>SNS 주제 생성기·콘텐츠 캘린더 제작</li>
+            <li>고객 설문·문의·자료를 정리하는 도구 만들기</li>
+            <li>만든 도구를 개인 업무와 수익화에 연결하기</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="card highlight">
+      <h2 class="section-title">6회가 끝나면 이렇게 달라집니다</h2>
+      <div class="for-grid">
+        <ul class="checklist">
+          <li>내 경험과 강점에서 SNS 주제와 수익화 방향을 정리합니다.</li>
+          <li>내 말투와 업무 기준을 기억하는 Claude Skill을 만듭니다.</li>
+          <li>시장조사부터 SNS 콘텐츠 제작까지 한 흐름으로 연결합니다.</li>
+        </ul>
+        <ul class="checklist">
+          <li>자료·문서·일정·고객관리 업무를 AI에게 맡길 수 있습니다.</li>
+          <li>역할별로 협업하는 개인 AI 업무팀을 구성합니다.</li>
+          <li>반복 업무를 대신하는 개인 자동화 도구를 만들 수 있습니다.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="apply">
+  <div class="wrap">
+    <h2 class="section-title">신청 및 결제 안내</h2>
+    <p class="section-desc">신청폼 작성 후 계좌이체 또는 카드결제를 진행해 주세요.</p>
+
+    <div class="payment-grid">
+      <div class="price-box">
+        <div class="price-label">참여비용</div>
+        <div class="price">45<small>만원</small></div>
+        <ul class="info-list">
+          <li><strong>신청 마감</strong>　2026년 8월 3일(월)</li>
+          <li><strong>진행 일정</strong>　격주 월요일 저녁 10시~12시</li>
+          <li><strong>전체 과정</strong>　총 6회 · 12시간</li>
+        </ul>
+        <div class="cta-row" style="margin-top:24px">
+          <a class="btn btn-primary" href="https://forms.gle/hGv6V1eZfeUU8DCb9" target="_blank" rel="noopener">신청폼 작성하기</a>
+          <a class="btn btn-outline" href="https://www.payapp.kr/L/z4hvp1" target="_blank" rel="noopener">카드결제 바로가기</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="bank">
+          <strong>계좌이체</strong>
+          국민은행 224601-04-025295<br />
+          예금주: 채문기
+        </div>
+        <p class="notice">
+          신청자명과 입금자명이 다를 경우 신청폼에 실제 입금자명을 작성해 주세요.
+          카드결제는 아래 버튼을 통해 바로 진행할 수 있습니다.
+        </p>
+        <a class="btn" style="width:100%;margin-top:10px;background:var(--primary);color:#fff"
+           href="https://www.payapp.kr/L/z4hvp1" target="_blank" rel="noopener">
+          카드로 45만원 결제하기
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    AI 1인 비즈니스 자동화 6회 완성반
+  </div>
+</footer>
+
+<div class="sticky">
+  <div class="wrap sticky-inner">
+    <div class="sticky-copy">
+      <strong>AI 1인 비즈니스 자동화 6회 완성반</strong>
+      <span>8월 3일 신청 마감 · 참여비용 45만원</span>
+    </div>
+    <div class="sticky-actions">
+      <a class="btn btn-outline" href="https://www.payapp.kr/L/z4hvp1" target="_blank" rel="noopener">카드결제</a>
+      <a class="btn btn-primary" href="https://forms.gle/hGv6V1eZfeUU8DCb9" target="_blank" rel="noopener">신청하기</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
